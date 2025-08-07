@@ -1,0 +1,117 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ff9933, #ffffff, #138808); /* Saffron, white, green */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #ff4500; /* Vibrant saffron */
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #006400; /* Rich green */
+}
+
+input, select {
+    padding: 12px;
+    margin: 8px;
+    border: 2px solid #ff9933; /* Saffron border */
+    border-radius: 6px;
+    background-color: #fff8e1; /* Light saffron background */
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #138808; /* Green on focus */
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    background-color: #138808; /* Green */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #006400; /* Darker green */
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.item select, .item input {
+    flex: 1;
+}
+
+.item button {
+    background-color: #ff4500; /* Saffron for remove button */
+}
+
+.item button:hover {
+    background-color: #cc3700; /* Darker saffron */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ff9933; /* Saffron border */
+    text-align: left;
+}
+
+th {
+    background-color: #138808; /* Green header */
+    color: white;
+}
+
+td {
+    background-color: #fff8e1; /* Light saffron */
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ff4500; /* Saffron link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #cc3700; /* Darker saffron */
+}
+
+#bill, #menuList {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Billing System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Shrinath Restaurant Billing</h1>
+        <form id="billingForm" action="/generate_bill" method="POST">
+            <h2>Customer Details</h2>
+            <input type="text" name="name" placeholder="Customer Name" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="email" name="email" placeholder="Email" required>
+            
+            <h2>Menu Items</h2>
+            <div id="items">
+                <div class="item">
+                    <select name="items[]" onchange="calculateTotal()">
+                        <option value="Paneer Tikka">Paneer Tikka (₹250)</option>
+                        <option value="Butter Chicken">Butter Chicken (₹350)</option>
+                        <option value="Dal Makhani">Dal Makhani (₹200)</option>
+                        <option value="Naan">Naan (₹50)</option>
+                        <option value="Biryani">Biryani (₹300)</option>
+                    </select>
+                    <input type="number" name="quantities[]" min="1" value="1" onchange="calculateTotal()">
+                    <button type="button" onclick="removeItem(this)">Remove</button>
+                </div>
+            </div>
+            <button type="button" onclick="addItem()">Add Item</button>
+            
+            <h2>Payment Method</h2>
+            <select name="payment_method" id="paymentMethod" required>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+            </select>
+            
+            <h3>Total: ₹<span id="total">0</span></h3>
+            <button type="submit">Generate Bill</button>
+        </form>
+        <a href="/customers">View Customers</a>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

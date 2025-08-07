@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill - Shrinath Restaurant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        #bill {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shrinath Restaurant Bill</h1>
+        <div id="bill">
+            <p><strong>Name:</strong> {{ name }}</p>
+            <p><strong>Phone:</strong> {{ phone }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <h2>Items</h2>
+            <ul>
+                {% for item in items %}
+                    <li><strong>{{ item.name }} (Qty: {{ item.quantity }})</strong> - ₹{{ item.price * item.quantity }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+            <p><strong>Total:</strong> ₹{{ total }}</p>
+            {% if payment_method == 'UPI' %}
+                <h2>Scan to Pay</h2>
+                <img src="/generate_qr?amount={{ total }}" alt="UPI QR Code">
+            {% endif %}
+            <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+            <button onclick="window.print()">Print Bill</button>
+        </div>
+        <a href="/">Back to Home</a>
+    </div>
+    <script>
+        function shareOnWhatsApp() {
+            // Get all the bill information
+            const name = document.querySelector('#bill p:nth-child(1)').innerText;
+            const phone = document.querySelector('#bill p:nth-child(2)').innerText;
+            const email = document.querySelector('#bill p:nth-child(3)').innerText;
+            
+            // Get all items
+            const items = [];
+            document.querySelectorAll('#bill ul li').forEach(item => {
+                items.push(item.innerText);
+            });
+            
+            const paymentMethod = document.querySelector('#bill p:nth-last-child(2)').innerText;
+            const total = document.querySelector('#bill p:last-child').innerText;
+            
+            // Construct the message
+            let message = `*Shrinath Restaurant Bill*\n\n`;
+            message += `${name}\n`;
+            message += `${phone}\n`;
+            message += `${email}\n\n`;
+            message += `*Items Ordered:*\n`;
+            message += items.join('\n') + '\n\n';
+            message += `${paymentMethod}\n`;
+            message += `${total}\n\n`;
+            message += `Thank you for dining with us!`;
+            
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
